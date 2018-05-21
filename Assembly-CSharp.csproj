@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\GameManagerScript.cs" />
     <Compile Include="Assets\Scripts\GoalScript.cs" />
     <Compile Include="Assets\Scripts\PaddleScript.cs" />
+    <Compile Include="Assets\Scripts\StartButtonScript.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/kimgs/Documents/Pong/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

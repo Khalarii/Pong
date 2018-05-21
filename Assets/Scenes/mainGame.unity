@@ -200,7 +200,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: (Player1) 0 - 0 (Player2)
+  m_Text: '
+
+    (Player1) 0 - 0 (Player2)'
 --- !u!222 &423928892
 CanvasRenderer:
   m_ObjectHideFlags: 0
