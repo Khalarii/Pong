@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,10 @@ public class GameManagerScript : MonoBehaviour {
     Text score;
 
     [SerializeField]
-    Button continuteButton;
+    Button[] pauseButtons;
+
+    [SerializeField]
+    Button continueButton;
 
     [SerializeField]
     Button exitButton;
@@ -26,13 +30,14 @@ public class GameManagerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        continuteButton.gameObject.SetActive(false);
-        exitButton.gameObject.SetActive(false);
-
         playerLeftScore = 0;
         playerRightScore = 0;
 
         paused = false;
+
+        pauseButtons = UnityEngine.UI.Button.FindObjectsOfType<Button>();
+
+        UpdateButtons();
 	}
 	
 	// Update is called once per frame
@@ -70,20 +75,28 @@ public class GameManagerScript : MonoBehaviour {
     {
         if (!paused)
         {
-            ballSpeed = new Vector2(ball.mainBody.velocity.x, ball.mainBody.velocity.y);
-            ball.mainBody.velocity = new Vector2(0, 0);
+            int multiplier = 50;
 
-            continuteButton.gameObject.SetActive(true);
-            exitButton.gameObject.SetActive(true);
+            ballSpeed = new Vector2(ball.mainBody.velocity.x * multiplier, ball.mainBody.velocity.y * multiplier);
+            ball.mainBody.velocity = new Vector2(0, 0);
         }
         else
         {
-            continuteButton.gameObject.SetActive(false);
-            exitButton.gameObject.SetActive(false);
-
+            //continueButton.gameObject.SetActive(false);
+            //exitButton.gameObject.SetActive(false);
             ball.mainBody.AddForce(ballSpeed);
+            UpdateScore();
         }
         paused = !paused;
+        UpdateButtons();
+    }
+
+    void UpdateButtons()
+    {
+        foreach (Button b in pauseButtons.Where(but => but.transform.name != "PauseButton"))
+        {
+            b.gameObject.SetActive(paused);
+        }
     }
 
     void UpdateScore()
