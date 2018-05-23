@@ -6,7 +6,7 @@ public class BallScript : MonoBehaviour {
     [SerializeField]
     float forceValue = 100.0f;
 
-    Rigidbody2D mainBody;
+    public Rigidbody2D mainBody;
 
 	// Use this for initialization
 	void Start () {

@@ -5,8 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class StartButtonScript : MonoBehaviour {
 
+    public bool trainMode, exit;
+
 	public void OnClicked()
     {
-        SceneManager.LoadScene("Scenes/mainGame");
+        if (trainMode)
+        {
+            SceneManager.LoadScene("Scenes/training");
+        }
+        else if (exit)
+        {
+            SceneManager.LoadScene("Scenes/Menu");
+        }
+        else
+        {
+            SceneManager.LoadScene("Scenes/mainGame");
+        }
     }
 }
