@@ -85,7 +85,6 @@ public class GameManagerScript : MonoBehaviour {
             //continueButton.gameObject.SetActive(false);
             //exitButton.gameObject.SetActive(false);
             ball.mainBody.AddForce(ballSpeed);
-            UpdateScore();
         }
         paused = !paused;
         UpdateButtons();
