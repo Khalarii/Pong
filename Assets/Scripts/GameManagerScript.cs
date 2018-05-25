@@ -16,17 +16,19 @@ public class GameManagerScript : MonoBehaviour {
     Text score;
 
     [SerializeField]
-    Button[] pauseButtons;
+    IEnumerable<Button> pauseButtons;
 
-    [SerializeField]
-    Button continueButton;
+    //[SerializeField]
+    //Button continueButton;
 
-    [SerializeField]
-    Button exitButton;
+    //[SerializeField]
+    //Button exitButton;
 
     bool paused;
 
     Vector2 ballSpeed;
+
+    internal const int multiplier = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -35,7 +37,7 @@ public class GameManagerScript : MonoBehaviour {
 
         paused = false;
 
-        pauseButtons = UnityEngine.UI.Button.FindObjectsOfType<Button>();
+        pauseButtons = FindObjectsOfType<Button>().Where(b => b.transform.name != "PauseButton");
 
         UpdateButtons();
 	}
@@ -73,26 +75,24 @@ public class GameManagerScript : MonoBehaviour {
 
     public void PlayPause()
     {
-        if (!paused)
-        {
-            int multiplier = 50;
+        paused = !paused;
 
+        if (paused)
+        {
             ballSpeed = new Vector2(ball.mainBody.velocity.x * multiplier, ball.mainBody.velocity.y * multiplier);
             ball.mainBody.velocity = new Vector2(0, 0);
         }
         else
         {
-            //continueButton.gameObject.SetActive(false);
-            //exitButton.gameObject.SetActive(false);
             ball.mainBody.AddForce(ballSpeed);
         }
-        paused = !paused;
+
         UpdateButtons();
     }
 
     void UpdateButtons()
     {
-        foreach (Button b in pauseButtons.Where(but => but.transform.name != "PauseButton"))
+        foreach (Button b in pauseButtons)
         {
             b.gameObject.SetActive(paused);
         }
